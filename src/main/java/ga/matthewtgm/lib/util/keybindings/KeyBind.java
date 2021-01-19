@@ -4,12 +4,18 @@ import org.lwjgl.input.Keyboard;
 
 public abstract class KeyBind {
 
-    public abstract String getDescription();
-    public abstract int getKey();
-    public abstract void onPressed();
+    private final String description;
+    public int keyCode;
 
-    public boolean isPressed() {
-        return this.getKey() == Keyboard.getEventKey() && Keyboard.getEventKeyState();
+    public KeyBind(String description, int keyCode) {
+        this.description = description;
+        this.keyCode = keyCode;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public abstract void onPressed();
 
 }

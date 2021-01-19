@@ -17,6 +17,7 @@ public class KeyBindManager {
     }
 
     private List<KeyBind> keyBinds = new ArrayList<>();
+    private KeyBinding asKeyBinding;
 
     public void addKeyBind(KeyBind keyBind) {
         this.keyBinds.add(keyBind);
@@ -24,7 +25,7 @@ public class KeyBindManager {
 
     public void init(String modName) {
         for (KeyBind keyBind : this.keyBinds) {
-            ClientRegistry.registerKeyBinding(new KeyBinding(keyBind.getDescription(), keyBind.getKey(), modName));
+            ClientRegistry.registerKeyBinding(asKeyBinding = new KeyBinding(keyBind.getDescription(), keyBind.keyCode, modName));
         }
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -32,7 +33,7 @@ public class KeyBindManager {
     @SubscribeEvent
     protected void onKeyPressed(InputEvent.KeyInputEvent event) {
         for (KeyBind keyBind : this.keyBinds) {
-            if(!keyBind.isPressed()) return;
+            if(!asKeyBinding.isPressed()) return;
             keyBind.onPressed();
         }
     }
