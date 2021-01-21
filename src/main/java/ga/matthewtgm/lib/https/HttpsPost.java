@@ -13,55 +13,53 @@ import java.util.StringJoiner;
 
 public class HttpsPost {
 
-    private String URL;
+    private final HttpURLConnection http;
+    private final String URL;
     private String JSONContent;
     private Map<String, String> params;
-
-    private final HttpURLConnection http;
+    private boolean postWasSuccessful;
+    private int responseCode;
+    private String responseCodeAsString;
+    private String responseMessage;
 
     public HttpsPost(String URL) {
         this.URL = URL;
-        this.http = (HttpURLConnection)connection(url(URL));
+        this.http = (HttpURLConnection) connection(url(URL));
+    }
+
+    public HttpsPost(String URL, String JSONContent, Map<String, String> params) {
+        this.URL = URL;
+        this.http = (HttpURLConnection) connection(url(URL));
+        this.JSONContent = JSONContent;
+        this.params = params;
     }
 
     public URL url(String url) {
         try {
             return new URL(url);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
     private URLConnection connection(URL url) {
         try {
             return url(URL).openConnection();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-
-    private boolean postWasSuccessful;
-
-    public HttpsPost(String URL, String JSONContent, Map<String, String> params) {
-        this.URL = URL;
-        this.http = (HttpURLConnection)connection(url(URL));
-        this.JSONContent = JSONContent;
-        this.params = params;
-    }
-
-    private int responseCode;
-    private String responseCodeAsString;
-    private String responseMessage;
 
     public void makePost() {
         try {
             assert http != null;
             http.setRequestMethod("POST");
             http.setDoOutput(true);
-            if(params != null) {
+            if (params != null) {
                 StringJoiner sj = new StringJoiner("&");
-                for(Map.Entry<String, String> entry : params.entrySet()) {
+                for (Map.Entry<String, String> entry : params.entrySet()) {
                     sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
                 }
             }
@@ -72,18 +70,18 @@ public class HttpsPost {
             http.setRequestProperty("User-Agent", Constants.NAME + "/" + Constants.ID);
             http.setConnectTimeout(5000);
             http.connect();
-            try(OutputStream os = http.getOutputStream()) {
+            try (OutputStream os = http.getOutputStream()) {
                 os.write(out);
             }
-            if(http.getResponseMessage() != null && !http.getResponseMessage().isEmpty()) {
+            if (http.getResponseMessage() != null && !http.getResponseMessage().isEmpty()) {
                 this.responseMessage = http.getResponseMessage();
             }
-            if(http.getResponseCode() != 0) {
+            if (http.getResponseCode() != 0) {
                 this.responseCode = http.getResponseCode();
                 this.responseCodeAsString = String.valueOf(http.getResponseCode());
             }
             postWasSuccessful = true;
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             postWasSuccessful = false;
         }
@@ -94,9 +92,9 @@ public class HttpsPost {
             assert http != null;
             http.setRequestMethod("POST");
             http.setDoOutput(true);
-            if(params != null) {
+            if (params != null) {
                 StringJoiner sj = new StringJoiner("&");
-                for(Map.Entry<String, String> entry : params.entrySet()) {
+                for (Map.Entry<String, String> entry : params.entrySet()) {
                     sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
                 }
             }
@@ -106,18 +104,18 @@ public class HttpsPost {
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             http.setConnectTimeout(5000);
             http.connect();
-            try(OutputStream os = http.getOutputStream()) {
+            try (OutputStream os = http.getOutputStream()) {
                 os.write(out);
             }
-            if(http.getResponseMessage() != null && !http.getResponseMessage().isEmpty()) {
+            if (http.getResponseMessage() != null && !http.getResponseMessage().isEmpty()) {
                 this.responseMessage = http.getResponseMessage();
             }
-            if(http.getResponseCode() != 0) {
+            if (http.getResponseCode() != 0) {
                 this.responseCode = http.getResponseCode();
                 this.responseCodeAsString = String.valueOf(http.getResponseCode());
             }
             postWasSuccessful = true;
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             postWasSuccessful = false;
         }

@@ -7,16 +7,14 @@ import java.net.URL;
 
 public class HttpsGet {
 
-    private String url;
+    private final String url;
     private boolean getWasSuccessful;
-
-    public HttpsGet(String URL) {
-        this.url = URL;
-    }
-
     private int responseCode;
     private String responseCodeAsString;
     private String responseMessage;
+    public HttpsGet(String URL) {
+        this.url = URL;
+    }
 
     public String sendGet() {
 
@@ -38,10 +36,10 @@ public class HttpsGet {
                     response.append(line);
                 }
 
-                if(httpClient.getResponseMessage() != null) {
+                if (httpClient.getResponseMessage() != null) {
                     this.responseMessage = httpClient.getResponseMessage();
                 }
-                if(httpClient.getResponseCode() != 0) {
+                if (httpClient.getResponseCode() != 0) {
                     this.responseCode = httpClient.getResponseCode();
                     this.responseCodeAsString = String.valueOf(httpClient.getResponseCode());
                 }
@@ -50,7 +48,7 @@ public class HttpsGet {
                 return response.toString();
 
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             getWasSuccessful = false;
             return null;

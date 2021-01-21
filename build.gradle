@@ -14,8 +14,8 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-version = "0.2"
-group= "ga.matthewtgm.lib"
+version = "0.3"
+group = "ga.matthewtgm.lib"
 archivesBaseName = "TGMLib"
 
 sourceCompatibility = targetCompatibility = 1.8
@@ -23,10 +23,10 @@ sourceCompatibility = targetCompatibility = 1.8
 minecraft {
     version = "1.8.9-11.15.1.2318-1.8.9"
     runDir = "run"
-	
-	replace("@VER@", project.version)
-	
-    mappings = "stable_20"
+
+    replace("@VER@", project.version)
+
+    mappings = "stable_22"
 }
 
 dependencies {
@@ -49,19 +49,24 @@ reobf {
     }
 }
 
-processResources
-{
+processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
-        
+
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
     }
 }
 

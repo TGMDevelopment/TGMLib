@@ -11,14 +11,19 @@ public abstract class GuiAppendedButton {
     public List<GuiButton> buttonList;
 
     public abstract int getId();
+
     public abstract int getX();
+
     public abstract int getY();
+
     public int getWidth() {
         return 200;
     }
+
     public int getHeight() {
         return 20;
     }
+
     public abstract String getText();
 
     public abstract void onClicked();

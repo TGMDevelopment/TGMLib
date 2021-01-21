@@ -1,5 +1,6 @@
 package ga.matthewtgm.lib.gui;
 
+import ga.matthewtgm.lib.util.ModConflicts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -19,8 +20,7 @@ public class GuiTransButton extends GuiButton {
 
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-        if (this.visible)
-        {
+        if (this.visible) {
             FontRenderer fontrenderer = mc.fontRendererObj;
             drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, new Color(0, 0, 0, 55).getRGB());
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -31,12 +31,9 @@ public class GuiTransButton extends GuiButton {
             GlStateManager.blendFunc(770, 771);
             this.mouseDragged(mc, mouseX, mouseY);
             int j = 14737632;
-            if (!this.enabled)
-            {
+            if (!this.enabled) {
                 j = 10526880;
-            }
-            else if (this.hovered)
-            {
+            } else if (this.hovered) {
                 j = 16777120;
             }
             this.drawCenteredString(fontrenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, j);

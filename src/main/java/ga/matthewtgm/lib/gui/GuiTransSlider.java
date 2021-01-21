@@ -22,23 +22,17 @@ public class GuiTransSlider extends GuiSlider {
 
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-        if (this.visible)
-        {
+        if (this.visible) {
             Minecraft.getMinecraft().renderEngine.bindTexture(buttonTextures);
             this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
             Gui.drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, new Color(0, 0, 0, 55).getRGB());
             this.mouseDragged(mc, mouseX, mouseY);
             int color = 14737632;
-            if (packedFGColour != 0)
-            {
+            if (packedFGColour != 0) {
                 color = packedFGColour;
-            }
-            else if (!this.enabled)
-            {
+            } else if (!this.enabled) {
                 color = 10526880;
-            }
-            else if (this.hovered)
-            {
+            } else if (this.hovered) {
                 color = 16777120;
             }
             String buttonText = this.displayString;
@@ -48,21 +42,6 @@ public class GuiTransSlider extends GuiSlider {
                 buttonText = mc.fontRendererObj.trimStringToWidth(buttonText, width - 6 - ellipsisWidth).trim() + "...";
             this.drawCenteredString(mc.fontRendererObj, buttonText, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, color);
         }
-    }
-
-    @Override
-    public void updateSlider() {
-        super.updateSlider();
-    }
-
-    @Override
-    public double getValue() {
-        return super.getValue();
-    }
-
-    @Override
-    public int getValueInt() {
-        return super.getValueInt();
     }
 
 }

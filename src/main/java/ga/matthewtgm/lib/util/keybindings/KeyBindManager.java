@@ -11,13 +11,13 @@ import java.util.List;
 
 public class KeyBindManager {
 
-    private static KeyBindManager INSTANCE = new KeyBindManager();
+    private static final KeyBindManager INSTANCE = new KeyBindManager();
+    private final List<KeyBind> keyBinds = new ArrayList<>();
+    private KeyBinding asKeyBinding;
+
     public static KeyBindManager getInstance() {
         return INSTANCE;
     }
-
-    private List<KeyBind> keyBinds = new ArrayList<>();
-    private KeyBinding asKeyBinding;
 
     public void addKeyBind(KeyBind keyBind) {
         this.keyBinds.add(keyBind);
@@ -33,7 +33,7 @@ public class KeyBindManager {
     @SubscribeEvent
     protected void onKeyPressed(InputEvent.KeyInputEvent event) {
         for (KeyBind keyBind : this.keyBinds) {
-            if(!asKeyBinding.isPressed()) return;
+            if (!asKeyBinding.isPressed()) return;
             keyBind.onPressed();
         }
     }

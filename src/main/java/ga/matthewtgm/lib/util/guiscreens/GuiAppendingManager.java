@@ -11,17 +11,17 @@ import java.util.List;
 
 public class GuiAppendingManager {
 
-    private static GuiAppendingManager INSTANCE = new GuiAppendingManager();
+    private static final GuiAppendingManager INSTANCE = new GuiAppendingManager();
+    private final List<GuiAppendedButton> appendedButtons = new ArrayList<>();
+    private GuiScreen screenToAddTo;
 
     public static GuiAppendingManager getInstance() {
         return INSTANCE;
     }
 
-    private final List<GuiAppendedButton> appendedButtons = new ArrayList<>();
-    private GuiScreen screenToAddTo;
-
     /**
      * Should be called inside {@link net.minecraftforge.client.event.GuiOpenEvent}
+     *
      * @param screen the screen to append the button to
      * @param button the button to append. An instance of {@link GuiAppendedButton}
      */
@@ -36,7 +36,7 @@ public class GuiAppendingManager {
 
     @SubscribeEvent
     protected void onGuiInit(GuiScreenEvent.InitGuiEvent event) {
-        if(event.gui != this.screenToAddTo) return;
+        if (event.gui != this.screenToAddTo) return;
         for (GuiAppendedButton appendedButton : this.appendedButtons) {
             appendedButton.parent = event.gui;
             appendedButton.buttonList = event.buttonList;
@@ -46,7 +46,7 @@ public class GuiAppendingManager {
 
     @SubscribeEvent
     protected void onGuiActionPerformed(GuiScreenEvent.ActionPerformedEvent event) {
-        if(event.gui != this.screenToAddTo) return;
+        if (event.gui != this.screenToAddTo) return;
         for (GuiAppendedButton appendedButton : this.appendedButtons) {
             if (event.button.id == appendedButton.getId()) {
                 appendedButton.onClicked();

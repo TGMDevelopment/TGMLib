@@ -12,10 +12,6 @@ import java.util.Map;
 
 public class PlayerUtils {
 
-    /**
-     * Adds layers to the player skin (Capes, wings, etc)
-     * @param layer the layer being added
-     */
     public void addLayer(LayerRenderer layer) {
 
         try {
@@ -30,7 +26,7 @@ public class PlayerUtils {
                 method.invoke(render, layer);
             }
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
