@@ -14,7 +14,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-version = "0.3"
+version = "0.4"
 group = "ga.matthewtgm.lib"
 archivesBaseName = "TGMLib"
 
@@ -64,10 +64,8 @@ processResources {
     }
 }
 
-allprojects {
-    repositories {
-        maven { url 'https://jitpack.io' }
-    }
+repositories {
+    maven { url 'https://jitpack.io' }
 }
 
 tasks.reobfJar.dependsOn(tasks.shadowJar)
