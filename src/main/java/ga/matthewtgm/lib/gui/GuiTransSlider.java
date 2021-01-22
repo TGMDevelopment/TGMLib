@@ -44,4 +44,16 @@ public class GuiTransSlider extends GuiSlider {
         }
     }
 
+    public void setX(int x) {
+        this.xPosition = x;
+    }
+
+    public void setY(int y) {
+        this.yPosition = y;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
 }
