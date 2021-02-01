@@ -6,7 +6,12 @@ import net.minecraftforge.fml.client.config.GuiSlider;
 
 import java.awt.*;
 
+/**
+ * A transparent-ish version of {@link GuiSlider}
+ */
 public class GuiTransSlider extends GuiSlider {
+
+    private Color buttonColour = new Color(0, 0, 0, 55);
 
     public GuiTransSlider(int id, int xPos, int yPos, int width, int height, String prefix, String suf, double minVal, double maxVal, double currentVal, boolean showDec, boolean drawStr) {
         super(id, xPos, yPos, width, height, prefix, suf, minVal, maxVal, currentVal, showDec, drawStr);
@@ -25,7 +30,7 @@ public class GuiTransSlider extends GuiSlider {
         if (this.visible) {
             Minecraft.getMinecraft().renderEngine.bindTexture(buttonTextures);
             this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
-            Gui.drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, new Color(0, 0, 0, 55).getRGB());
+            Gui.drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, this.buttonColour.getRGB());
             this.mouseDragged(mc, mouseX, mouseY);
             int color = 14737632;
             if (packedFGColour != 0) {
@@ -44,16 +49,46 @@ public class GuiTransSlider extends GuiSlider {
         }
     }
 
+    /**
+     * Sets the xPosition of the button.
+     *
+     * @param x new xPosition.
+     */
     public void setX(int x) {
         this.xPosition = x;
     }
 
+    /**
+     * Sets the yPosition of the button.
+     *
+     * @param y new yPosition.
+     */
     public void setY(int y) {
         this.yPosition = y;
     }
 
+    /**
+     * Sets the height of the button.
+     *
+     * @param height new height.
+     */
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    /**
+     * @return the colour of the button.
+     */
+    public Color getButtonColour() {
+        return buttonColour;
+    }
+
+    /**
+     * Sets the colour of the button.
+     * @param buttonColour new button colour.
+     */
+    public void setButtonColour(Color buttonColour) {
+        this.buttonColour = buttonColour;
     }
 
 }

@@ -5,9 +5,12 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * A transparent-ish version of {@link net.minecraft.client.gui.GuiButton} with a little more "pizazz".
+ */
 public class GuiTransImageButton extends GuiTransButton {
 
-    private final ResourceLocation rlImage;
+    private ResourceLocation rlImage;
 
     public GuiTransImageButton(int buttonId, int x, int y, ResourceLocation image) {
         super(buttonId, x, y, 20, 20, "");
@@ -31,16 +34,40 @@ public class GuiTransImageButton extends GuiTransButton {
         this.mouseDragged(mc, mouseX, mouseY);
     }
 
+    /**
+     * Sets the xPosition of the button.
+     *
+     * @param x new xPosition.
+     */
     public void setX(int x) {
         this.xPosition = x;
     }
 
+    /**
+     * Sets the yPosition of the button.
+     *
+     * @param y new yPosition.
+     */
     public void setY(int y) {
         this.yPosition = y;
     }
 
+    /**
+     * Sets the height of the button.
+     *
+     * @param height new height.
+     */
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    /**
+     * Lets you set the image rendered on the button.
+     *
+     * @param image image rendered.
+     */
+    public void setImage(ResourceLocation image) {
+        this.rlImage = image;
     }
 
 }

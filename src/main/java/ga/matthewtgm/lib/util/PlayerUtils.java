@@ -10,10 +10,17 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+/**
+ * Makes methods regarding the client player and other players easier to access.
+ */
 public class PlayerUtils {
 
+    /**
+     * Adds a new layer to the player class.
+     *
+     * @param layer the layer to be added.
+     */
     public void addLayer(LayerRenderer layer) {
-
         try {
 
             Method method = RendererLivingEntity.class.getDeclaredMethod("addLayer", LayerRenderer.class);
@@ -29,7 +36,6 @@ public class PlayerUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 }

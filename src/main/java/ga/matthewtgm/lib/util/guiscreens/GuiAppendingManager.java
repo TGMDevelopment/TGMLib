@@ -9,6 +9,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Used to append buttons to a {@link GuiScreen}.
+ */
 public class GuiAppendingManager {
 
     private static final GuiAppendingManager INSTANCE = new GuiAppendingManager();

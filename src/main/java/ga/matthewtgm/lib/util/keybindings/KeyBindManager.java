@@ -1,18 +1,22 @@
 package ga.matthewtgm.lib.util.keybindings;
 
+import ga.matthewtgm.lib.TGMLib;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * Used to add Minecraft keybinds with ease.
+ */
 public class KeyBindManager {
 
     private static final KeyBindManager INSTANCE = new KeyBindManager();
-    private final List<KeyBind> keyBinds = new ArrayList<>();
+    private final Map<KeyBind, KeyBinding> keyBinds = new HashMap<>();
     private KeyBinding asKeyBinding;
 
     public static KeyBindManager getInstance() {
@@ -20,22 +24,25 @@ public class KeyBindManager {
     }
 
     public void addKeyBind(KeyBind keyBind) {
-        this.keyBinds.add(keyBind);
+        this.keyBinds.put(keyBind, new KeyBinding(keyBind.getDescription(), keyBind.keyCode, TGMLib.getInstance().getModName()));
     }
 
-    public void init(String modName) {
-        for (KeyBind keyBind : this.keyBinds) {
-            ClientRegistry.registerKeyBinding(asKeyBinding = new KeyBinding(keyBind.getDescription(), keyBind.keyCode, modName));
-        }
+    /**
+     * Should be called after adding all mod keybinds
+     */
+    public void init() {
+        this.keyBinds.forEach((keyBind, keyBindinding) -> {
+            ClientRegistry.registerKeyBinding(keyBindinding);
+        });
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     @SubscribeEvent
     protected void onKeyPressed(InputEvent.KeyInputEvent event) {
-        for (KeyBind keyBind : this.keyBinds) {
-            if (!asKeyBinding.isPressed()) return;
+        this.keyBinds.forEach((keyBind, keyBinding) -> {
+            if (!keyBinding.isPressed()) return;
             keyBind.onPressed();
-        }
+        });
     }
 
 }

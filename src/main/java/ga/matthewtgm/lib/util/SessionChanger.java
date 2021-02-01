@@ -14,6 +14,9 @@ import java.util.UUID;
 import static java.lang.reflect.Modifier.FINAL;
 import static net.minecraft.client.Minecraft.getMinecraft;
 
+/**
+ * Changes the game session to allow you to login to the game while in the developer environment.
+ */
 public class SessionChanger {
 
     private static SessionChanger INSTANCE;
@@ -26,12 +29,21 @@ public class SessionChanger {
         authService.createMinecraftSessionService();
     }
 
+    /**
+     * @return an instance of {@link SessionChanger}.
+     */
     public static SessionChanger getInstance() {
         if (INSTANCE == null)
             INSTANCE = new SessionChanger();
         return INSTANCE;
     }
 
+    /**
+     * Sets the game sessoion, logging you in.
+     *
+     * @param email    the email used for your account.
+     * @param password the password used for your account.
+     */
     public void setUser(String email, String password) {
         if (!getMinecraft().getSession().getUsername().equals(email) || getMinecraft().getSession().getToken().equals("0")) {
 
