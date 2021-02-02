@@ -4,6 +4,8 @@ import net.minecraftforge.fml.common.Loader;
 
 import java.util.ArrayList;
 
+//TODO: MAKE THIS BETTER
+
 /**
  * An ArrayList class used to check for conflicts in mods.
  */
