@@ -14,7 +14,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-version = "0.7.2"
+version = "0.7.4"
 group = "ga.matthewtgm.lib"
 archivesBaseName = "TGMLib"
 
