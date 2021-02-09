@@ -1,6 +1,5 @@
 package ga.matthewtgm.lib.util.keybindings;
 
-import ga.matthewtgm.lib.TGMLib;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -23,8 +22,8 @@ public class KeyBindManager {
         return INSTANCE;
     }
 
-    public void addKeyBind(KeyBind keyBind) {
-        this.keyBinds.put(keyBind, new KeyBinding(keyBind.getDescription(), keyBind.keyCode, TGMLib.getInstance().getModName()));
+    public void addKeyBind(String modName, KeyBind keyBind) {
+        this.keyBinds.put(keyBind, new KeyBinding(keyBind.getDescription(), keyBind.keyCode, modName));
     }
 
     /**

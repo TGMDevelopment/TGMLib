@@ -1,6 +1,5 @@
 package ga.matthewtgm.lib.util;
 
-import ga.matthewtgm.lib.TGMLib;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,8 +25,8 @@ public class LoggingUtils {
      * @param name logger name.
      * @return an instance of {@link Logger}.
      */
-    public Logger createLogger(String name) {
-        return LogManager.getLogger(TGMLib.getInstance().getModName() + " (" + name + ")");
+    public Logger createLogger(String base, String name) {
+        return LogManager.getLogger(base + " (" + name + ")");
     }
 
     /**
@@ -36,8 +35,8 @@ public class LoggingUtils {
      * @param clazz logger class. (gets the class name and converts it into a string.)
      * @return an instance of {@link Logger}.
      */
-    public Logger createClassLogger(Class clazz) {
-        return LogManager.getLogger(TGMLib.getInstance().getModName() + " (" + clazz.getSimpleName() + ")");
+    public Logger createClassLogger(String base, Class clazz) {
+        return LogManager.getLogger(base + " (" + clazz.getSimpleName() + ")");
     }
 
 }
