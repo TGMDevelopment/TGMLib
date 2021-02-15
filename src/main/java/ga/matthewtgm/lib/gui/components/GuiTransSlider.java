@@ -1,4 +1,4 @@
-package ga.matthewtgm.lib.gui;
+package ga.matthewtgm.lib.gui.components;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;

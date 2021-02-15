@@ -1,0 +1,49 @@
+package ga.matthewtgm.lib.commands;
+
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
+
+import java.util.List;
+
+public class ModCommand extends CommandBase {
+
+    private final ModCommandRunnable runnable;
+
+    public ModCommand(ModCommandRunnable runnable) {
+        this.runnable = runnable;
+    }
+
+    @Override
+    public String getCommandName() {
+        return this.runnable.getCommandString();
+    }
+
+    @Override
+    public int getRequiredPermissionLevel() {
+        return this.runnable.getRequiredPermissionLevel();
+    }
+
+    @Override
+    public String getCommandUsage(ICommandSender sender) {
+        return this.runnable.getCommandUsage();
+    }
+
+    @Override
+    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+        this.runnable.process((EntityPlayer) sender.getCommandSenderEntity(), args);
+    }
+
+    @Override
+    public List<String> getCommandAliases() {
+        return this.runnable.getCommandAliases();
+    }
+
+    @Override
+    public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
+        return this.runnable.getTabCompleteOptions(sender, args, pos);
+    }
+
+}
