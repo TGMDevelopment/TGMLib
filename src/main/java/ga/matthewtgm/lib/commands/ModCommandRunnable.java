@@ -16,6 +16,8 @@ public abstract class ModCommandRunnable {
 
     public abstract int getRequiredPermissionLevel();
 
+    public abstract List<ModCommandArgument> getArguments();
+
     public abstract void process(EntityPlayer sender, String[] args) throws CommandException;
 
     public List<String> getCommandAliases() {

@@ -34,6 +34,12 @@ public class ModCommand extends CommandBase {
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         this.runnable.process((EntityPlayer) sender.getCommandSenderEntity(), args);
+        if (this.runnable.getArguments() != null) {
+            for (ModCommandArgument argument : this.runnable.getArguments()) {
+                if (args[0].toLowerCase().equalsIgnoreCase(argument.getArgString()))
+                    argument.process();
+            }
+        }
     }
 
     @Override
