@@ -24,8 +24,4 @@ public abstract class ModCommandRunnable {
         return Collections.emptyList();
     }
 
-    public List<String> getTabCompleteOptions(ICommandSender sender, String[] args, BlockPos pos) {
-        return null;
-    }
-
 }

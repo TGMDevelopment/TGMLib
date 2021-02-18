@@ -6,6 +6,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModCommand extends CommandBase {
@@ -36,8 +37,10 @@ public class ModCommand extends CommandBase {
         this.runnable.process((EntityPlayer) sender.getCommandSenderEntity(), args);
         if (this.runnable.getArguments() != null) {
             for (ModCommandArgument argument : this.runnable.getArguments()) {
-                if (args[0].toLowerCase().equalsIgnoreCase(argument.getArgString()))
-                    argument.process();
+                if (args[argument.getArgNum()] != null) {
+                    if (args[argument.getArgNum()].toLowerCase().equalsIgnoreCase(argument.getArgString()))
+                        argument.process();
+                }
             }
         }
     }
@@ -49,7 +52,9 @@ public class ModCommand extends CommandBase {
 
     @Override
     public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
-        return this.runnable.getTabCompleteOptions(sender, args, pos);
+        List<String> options = new ArrayList<>();
+        this.runnable.getArguments().forEach(opt -> options.add(opt.getArgString()));
+        return new ArrayList<>(options);
     }
 
 }
