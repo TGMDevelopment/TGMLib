@@ -14,6 +14,10 @@ public class WebUtils {
         return INSTANCE;
     }
 
+    /**
+     * @param url the url to fetch the json from.
+     * @return the json in the form of a string.
+     */
     public String getJsonOnline(String url) {
         try {
             StringBuilder builder = new StringBuilder();

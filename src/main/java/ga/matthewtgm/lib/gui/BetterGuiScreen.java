@@ -1,11 +1,21 @@
 package ga.matthewtgm.lib.gui;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 
 import java.io.IOException;
 
+/**
+ * An extended GuiScreen class that forces you to implement all REQUIRED methods.
+ * <br></br>
+ * <br></br>
+ * GuiScreen#drawScreen should be as follows:
+ * <pre>
+ * public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+ *      super.drawCompoents(mouseX, mouseY);
+ * }
+ * </pre>
+ */
 public abstract class BetterGuiScreen extends GuiScreen {
 
     /**
@@ -21,8 +31,6 @@ public abstract class BetterGuiScreen extends GuiScreen {
     protected abstract void actionPerformed(GuiButton button) throws IOException;
 
     /**
-     * Call {@code BetterGuiScreen#drawButtons} inside this method.
-     *
      * @param mouseX the x positioning of the mouse on the monitor.
      * @param mouseY the y positioning of the mouse on the monitor.
      * @param partialTicks unused.
