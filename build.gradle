@@ -5,20 +5,36 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+        maven {
+            name = 'sponge'
+            url = 'https://repo.spongepowered.org/maven'
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
         classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.4'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-version = "0.7.7.3"
+version = "0.7.8"
 group = "ga.matthewtgm.lib"
 archivesBaseName = "TGMLib"
 
 sourceCompatibility = targetCompatibility = 1.8
+
+repositories {
+    maven { url "https://jitpack.io" }
+    maven {
+        name = 'sponge'
+        url = 'https://repo.spongepowered.org/maven/'
+    }
+    mavenCentral()
+    jcenter()
+    maven { url 'https://jitpack.io' }
+}
 
 minecraft {
     version = "1.8.9-11.15.1.2318-1.8.9"
@@ -30,19 +46,25 @@ minecraft {
 }
 
 dependencies {
-
-}
-
-shadowJar {
-    exclude('dummyThing')
-
-    classifier = "working"
+    compile('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
+        exclude module: 'launchwrapper'
+        exclude module: 'guava'
+        exclude module: 'gson'
+        exclude module: 'commons-io'
+    }
 }
 
 reobf {
     shadowJar {
         mappingType = 'SEARGE'
     }
+}
+
+jar {
+    manifest.attributes(
+            "MixinConfigs": 'mixins.tgmlib.json',
+            "TweakClass": 'org.spongepowered.asm.launch.MixinTweaker',
+    )
 }
 
 processResources {
@@ -58,10 +80,6 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-repositories {
-    maven { url 'https://jitpack.io' }
 }
 
 tasks.reobfJar.dependsOn(tasks.shadowJar)
