@@ -30,8 +30,7 @@ public abstract class BetterGuiScreen extends GuiScreen {
     @Override
     protected abstract void actionPerformed(GuiButton button) throws IOException;
 
-    /**
-     * @param mouseX the x positioning of the mouse on the monitor.
+    /**     * @param mouseX the x positioning of the mouse on the monitor.
      * @param mouseY the y positioning of the mouse on the monitor.
      * @param partialTicks unused.
      */

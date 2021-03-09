@@ -1,6 +1,5 @@
 package ga.matthewtgm.lib.mixins;
 
-import ga.matthewtgm.lib.gui.GuiIngameTGMLib;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import org.spongepowered.asm.mixin.Mixin;

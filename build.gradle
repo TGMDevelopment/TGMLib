@@ -19,7 +19,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-version = "0.7.8"
+version = "0.7.7.3"
 group = "ga.matthewtgm.lib"
 archivesBaseName = "TGMLib"
 
@@ -27,13 +27,6 @@ sourceCompatibility = targetCompatibility = 1.8
 
 repositories {
     maven { url "https://jitpack.io" }
-    maven {
-        name = 'sponge'
-        url = 'https://repo.spongepowered.org/maven/'
-    }
-    mavenCentral()
-    jcenter()
-    maven { url 'https://jitpack.io' }
 }
 
 minecraft {
@@ -45,26 +38,12 @@ minecraft {
     mappings = "stable_22"
 }
 
-dependencies {
-    compile('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
-        exclude module: 'launchwrapper'
-        exclude module: 'guava'
-        exclude module: 'gson'
-        exclude module: 'commons-io'
-    }
-}
+dependencies {}
 
 reobf {
     shadowJar {
         mappingType = 'SEARGE'
     }
-}
-
-jar {
-    manifest.attributes(
-            "MixinConfigs": 'mixins.tgmlib.json',
-            "TweakClass": 'org.spongepowered.asm.launch.MixinTweaker',
-    )
 }
 
 processResources {
