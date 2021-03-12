@@ -19,42 +19,32 @@ public class ModCommand extends CommandBase {
 
     @Override
     public String getCommandName() {
-        return this.runnable.getCommandString();
+        return runnable.name();
     }
 
     @Override
     public int getRequiredPermissionLevel() {
-        return this.runnable.getRequiredPermissionLevel();
+        return runnable.permissionLevel();
     }
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return this.runnable.getCommandUsage();
+        return runnable.usage();
     }
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-        this.runnable.process((EntityPlayer) sender.getCommandSenderEntity(), args);
-        if (this.runnable.getArguments() != null) {
-            for (ModCommandArgument argument : this.runnable.getArguments()) {
-                if (args[argument.getArgNum()] != null) {
-                    if (args[argument.getArgNum()].toLowerCase().equalsIgnoreCase(argument.getArgString()))
-                        argument.process();
-                }
-            }
-        }
+        runnable.process((EntityPlayer) sender.getCommandSenderEntity(), args);
     }
 
     @Override
     public List<String> getCommandAliases() {
-        return this.runnable.getCommandAliases();
+        return runnable.aliases();
     }
 
     @Override
     public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
-        List<String> options = new ArrayList<>();
-        this.runnable.getArguments().forEach(opt -> options.add(opt.getArgString()));
-        return new ArrayList<>(options);
+        return new ArrayList<>(runnable.tabCompleteOptions());
     }
 
 }
